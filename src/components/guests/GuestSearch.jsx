@@ -5,16 +5,18 @@ const GuestSearch = () => {
   const searchValue = useRef("");
   const { searchGuest, clearGuest } = useContext(GuestContext);
   const handleChange = (e) => {
-    if (searchValue.current.value !== "") {
+    if (searchValue.current.value) {
       searchGuest(e.target.value);
     } else {
       clearGuest();
     }
   };
+
   return (
     <div>
       <input
         type="text"
+        ref={searchValue}
         onChange={handleChange}
         className="search"
         placeholder=" Search Guest by name ..."
