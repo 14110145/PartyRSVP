@@ -7,12 +7,18 @@ const GuestForm = () => {
     phone: "",
     dietary: "Non-Vegan",
   });
-  const { addGuest, editGuest, clearEditGuest, editAble, updateGuest } = useContext(GuestContext);
+  const { addGuest, clearEditGuest, editAble, updateGuest } = useContext(GuestContext);
   const { name, phone, dietary } = guest;
 
   useEffect(() => {
     if (editAble !== null) {
       setGuest(editAble);
+    } else {
+      setGuest({
+        name: "",
+        phone: "",
+        dietary: "Non-Vegan",
+      });
     }
   }, [editAble]);
 
