@@ -46,4 +46,38 @@ router.post(
   }
 );
 
+router.delete("/:id", authMiddleware, async (req, res) => {
+  try {
+    let guest = await Guest.findById(req.params.id);
+    if (!guest) {
+      return res.status(404).json({ msg: "Guest not found." });
+    }
+    await Guest.findOneAndRemove(req.params.id);
+    res.send("Guest removed.");
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error.");
+  }
+});
+
+router.put("/:id", authMiddleware, async (req, res) => {
+  const { name, dietary, phone, isconfirmed } = req.body;
+  const updateGuest = { name, dietary, phone, isconfirmed };
+  try {
+    let guest = await Guest.findById(req.params.id);
+    if (!guest) {
+      return res.status(404).json({ msg: "Guest not found." });
+    }
+    guest = await Guest.findByIdAndUpdate(
+      req.params.id,
+      { $set: updateGuest },
+      { new: true }
+    );
+    res.send(guest);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error.");
+  }
+});
+
 module.exports = router;
