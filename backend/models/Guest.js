@@ -13,7 +13,7 @@ const guestSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  deitary: {
+  dietary: {
     type: String,
     default: "Non-vegan",
     required: true,
