@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import GuestContext from "../../context/guestContext/guestContext";
 
 const Guest = ({ guest }) => {
-  const { id, name, phone, dietary, isconfirmed } = guest;
+  const { _id, name, phone, dietary, isconfirmed } = guest;
   const { removeGuest, updateGuest, editGuest } = useContext(GuestContext);
 
   const handleRemove = () => {
-    removeGuest(id);
+    removeGuest(_id);
   };
 
   const handleIsconfirmed = () => {
@@ -41,7 +41,11 @@ const Guest = ({ guest }) => {
         <span
           className={
             "badge " +
-            (dietary === "Vegan" ? "red" : dietary === "Non-Vegan" ? "green" : "seaGreen")
+            (dietary === "Vegan"
+              ? "red"
+              : dietary === "Non-Vegan"
+              ? "green"
+              : "seaGreen")
           }
         >
           {dietary}

@@ -7,10 +7,17 @@ import {
   UPDATE_GUEST,
   EDIT_GUEST,
   CLEAR_EDIT_GUEST,
+  GET_GUEST,
+  GUEST_ERROR,
 } from "../types";
 
 export default (state, { type, payload }) => {
   switch (type) {
+    case GET_GUEST:
+      return {
+        ...state,
+        guests: payload,
+      };
     case ADD_GUEST:
       return {
         ...state,
@@ -34,13 +41,21 @@ export default (state, { type, payload }) => {
     case UPDATE_GUEST:
       return {
         ...state,
-        guests: state.guests.map((guest) => (guest.id === payload.id ? payload : guest)),
+        guests: state.guests.map((guest) =>
+          guest.id === payload.id ? payload : guest
+        ),
       };
     case SEARCH_GUEST:
       const reg = new RegExp(`${payload}`, "gi");
       return {
         ...state,
         search: state.guests.filter((guest) => guest.name.match(reg)),
+      };
+    case GUEST_ERROR:
+      return {
+        ...state,
+        guests: [],
+        errors: payload,
       };
     case CLEAR_GUEST:
       return {

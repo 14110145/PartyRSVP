@@ -7,6 +7,8 @@ export const REMOVE_GUEST = "REMOVE_GUEST";
 export const UPDATE_GUEST = "UPDATE_GUEST";
 export const EDIT_GUEST = "EDIT_GUEST";
 export const CLEAR_EDIT_GUEST = "CLEAR_EDIT_GUEST";
+export const GET_GUEST = "GET_GUEST";
+export const GUEST_ERROR = "GUEST_ERROR";
 
 // user
 export const SUCCESS_REGISTER = "SUCCESS_REGISTER";
@@ -15,3 +17,6 @@ export const SUCCESS_LOGIN = "SUCCESS_LOGIN";
 export const FAIL_LOGIN = "FAIL_LOGIN";
 export const SET_ERROR = "SET_ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
+export const LOG_OUT = "LOG_OUT";
+export const SET_USER = "SET_USER";
+export const AUTH_ERROR = "AUTH_ERROR";

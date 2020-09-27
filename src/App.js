@@ -7,7 +7,12 @@ import GuestState from "./context/guestContext/GuestState";
 import AuthState from "./context/authContext/AuthState";
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
+import PrivateRoute from "./components/pages/routes/PrivateRoute";
+import setToken from "./utils/setToken";
 
+if (localStorage.getItem("token")) {
+  setToken(localStorage.getItem("token"));
+}
 function App() {
   return (
     <AuthState>
@@ -16,7 +21,7 @@ function App() {
           <div>
             <Navbar />
             <Switch>
-              <Route exact path="/" component={Home} />
+              <PrivateRoute exact path="/" component={Home} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
             </Switch>

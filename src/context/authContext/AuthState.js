@@ -9,19 +9,42 @@ import {
   FAIL_REGISTER,
   SET_ERROR,
   CLEAR_ERROR,
+  LOG_OUT,
+  SET_USER,
+  AUTH_ERROR,
 } from "../types";
+import setToken from "../../utils/setToken";
 
 const AuthState = (props) => {
   const initialState = {
+    user: null,
     userAuth: null,
     errors: null,
   };
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  const getUser = async () => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+    try {
+      const res = await axios.get("/auth");
+      dispatch({
+        type: SET_USER,
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: AUTH_ERROR,
+        payload: error.response.data,
+      });
+    }
+  };
+
   const registerUser = async (userData) => {
     const config = {
-      header: {
-        "Content-Type": "applicat/ion/json",
+      headers: {
+        "Content-Type": "application/json",
       },
     };
 
@@ -34,14 +57,14 @@ const AuthState = (props) => {
     } catch (error) {
       dispatch({
         type: FAIL_REGISTER,
-        payload: error.response.data,
+        payload: error.response.msg,
       });
     }
   };
 
   const loginUser = async (userData) => {
     const config = {
-      header: {
+      headers: {
         "Content-Type": "application/json",
       },
     };
@@ -60,6 +83,12 @@ const AuthState = (props) => {
     }
   };
 
+  const logout = () => {
+    dispatch({
+      type: LOG_OUT,
+    });
+  };
+
   const setError = (error) => {
     dispatch({
       type: SET_ERROR,
@@ -76,12 +105,15 @@ const AuthState = (props) => {
   return (
     <AuthContext.Provider
       value={{
+        user: state.user,
         userAuth: state.userAuth,
         errors: state.errors,
         loginUser,
         registerUser,
         setError,
         clearError,
+        logout,
+        getUser,
       }}
     >
       {props.children}
