@@ -6,7 +6,7 @@ const Guests = () => {
   const { guests, filterGuest, search, getGuests } = useContext(GuestContext);
   useEffect(() => {
     getGuests();
-    // esline-disable-next-line
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="guests">

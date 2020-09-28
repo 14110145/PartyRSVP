@@ -26,7 +26,7 @@ export default (state, { type, payload }) => {
     case REMOVE_GUEST:
       return {
         ...state,
-        guests: state.guests.filter((guest) => guest.id !== payload),
+        guests: state.guests.filter((guest) => guest._id !== payload),
       };
     case EDIT_GUEST:
       return {
@@ -42,7 +42,7 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         guests: state.guests.map((guest) =>
-          guest.id === payload.id ? payload : guest
+          guest._id === payload._id ? payload : guest
         ),
       };
     case SEARCH_GUEST:

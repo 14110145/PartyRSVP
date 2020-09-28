@@ -67,10 +67,10 @@ function GuestState(props) {
     }
   };
 
-  const removeGuest = async (id) => {
+  const removeGuest = async (_id) => {
     try {
-      await axios.delete(`/guests/${id}`);
-      dispatch({ type: REMOVE_GUEST, payload: id });
+      await axios.delete(`/guests/${_id}`);
+      dispatch({ type: REMOVE_GUEST, payload: _id });
     } catch (error) {
       dispatch({
         type: GUEST_ERROR,
