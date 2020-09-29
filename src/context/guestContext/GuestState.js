@@ -14,6 +14,7 @@ import {
   GUEST_ERROR,
   GET_GUEST,
 } from "../types";
+import setToken from "../../utils/setToken";
 
 function GuestState(props) {
   const initialState = {
@@ -26,6 +27,9 @@ function GuestState(props) {
   const [state, dispatch] = useReducer(guestReducer, initialState);
 
   const getGuests = async () => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
     try {
       const res = await axios.get("/guests");
       dispatch({
