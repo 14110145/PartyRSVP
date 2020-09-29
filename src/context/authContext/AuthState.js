@@ -12,6 +12,7 @@ import {
   LOG_OUT,
   SET_USER,
   AUTH_ERROR,
+  RE_LOGIN,
 } from "../types";
 import setToken from "../../utils/setToken";
 
@@ -102,6 +103,14 @@ const AuthState = (props) => {
     });
   };
 
+  const reLogin = () => {
+    if (localStorage.getItem("token")) {
+      dispatch({
+        type: RE_LOGIN,
+      });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -114,6 +123,7 @@ const AuthState = (props) => {
         clearError,
         logout,
         getUser,
+        reLogin,
       }}
     >
       {props.children}

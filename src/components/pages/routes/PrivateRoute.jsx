@@ -1,9 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { Redirect, Route } from "react-router-dom";
 import AuthContext from "../../../context/authContext/authContext";
-import { Route, Redirect } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { userAuth } = useContext(AuthContext);
+  const { userAuth, reLogin } = useContext(AuthContext);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      reLogin();
+    }
+    // eslint-disable-next-line
+  }, [userAuth]);
   return (
     <Route
       {...rest}

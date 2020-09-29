@@ -8,6 +8,7 @@ import {
   LOG_OUT,
   SET_USER,
   AUTH_ERROR,
+  RE_LOGIN,
 } from "../types";
 export default (state, action) => {
   switch (action.type) {
@@ -21,6 +22,12 @@ export default (state, action) => {
     case SUCCESS_REGISTER:
     case SUCCESS_LOGIN:
       localStorage.setItem("token", action.payload.token);
+      return {
+        ...state,
+        userAuth: true,
+        errors: null,
+      };
+    case RE_LOGIN:
       return {
         ...state,
         userAuth: true,

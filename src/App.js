@@ -8,11 +8,7 @@ import AuthState from "./context/authContext/AuthState";
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 import PrivateRoute from "./components/pages/routes/PrivateRoute";
-import setToken from "./utils/setToken";
 
-if (localStorage.getItem("token")) {
-  setToken(localStorage.getItem("token"));
-}
 function App() {
   return (
     <AuthState>
